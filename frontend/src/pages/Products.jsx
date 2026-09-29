@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Cards from '../components/Cards';
+import axios from 'axios';
 
 const Products = () => {
 //api call
@@ -8,18 +9,18 @@ const [products, setProducts]= useState([]);
 
 //function
 const getProducts = async ()=>{
-let response = await fetch('https://6895fd7e039a1a2b289119bf.mockapi.io/api/v1/products');
-let data = await response.json();
 
+
+let response = await axios.get('https://6895fd7e039a1a2b289119bf.mockapi.io/api/v1/products');
+let data = await response.data;
 setProducts([...data]);
-console.log(products)
-
+console.log(response.data)
 }
 
 useEffect(()=>{
 
     getProducts();
-},products)
+},[])
 
   return (
     <div>
